@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🍍 Para Fabi, con cariño de Walter White (el Walto)</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --panel:#0b132b;
+      --text:#fff8e7;
+      --accent:#facc15;
+      --accent2:#16a34a;
+      --ok:#f59e0b;
+      --muted:#fde68a;
+    }
+    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,sans-serif;color:var(--text);background:linear-gradient(160deg,#0b1020,#0f172a 40%,#0b1020 95%);} 
+    .wrap{min-height:100%;display:grid;place-items:center;padding:24px;}
+    .card{width:min(720px,95vw);background:linear-gradient(180deg,#0b132b,#0d1b2a 60%,#0b1322);border:1px solid #334155;border-radius:24px;padding:28px;position:relative;box-shadow:0 10px 30px #00000066, inset 0 0 0 1px #22315499;backdrop-filter:blur(6px);background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><g opacity="0.12"><path d="M60 18c6 0 14 12 14 12s-8-2-14-2-14 2-14 2 8-12 14-12z" fill="%2316a34a"/><ellipse cx="60" cy="66" rx="22" ry="28" fill="%23facc15"/><path d="M44 56l32 20M44 76l32-20" stroke="%230b1020" stroke-width="4" opacity="0.3"/></g></svg>');background-repeat:repeat;background-size:160px 160px;}
+    h1{font-size:clamp(26px,3vw,40px);margin-bottom:10px;text-align:center;}
+    p{line-height:1.6;}
+    button{appearance:none;border:0;cursor:pointer;text-decoration:none;color:#0b122a;font-weight:700;padding:12px 18px;border-radius:14px;font-size:16px;background:linear-gradient(180deg,#facc15,#fbbf24);box-shadow:0 8px 20px #facc1544,inset 0 -2px 0 #ca8a04;transition:transform .08s ease;}
+    button:hover{transform:translateY(-1px)}
+    .pine{position:absolute;right:20px;top:20px;animation:float 3s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+    footer{text-align:center;margin-top:20px;font-size:13px;color:#fde68a;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="card">
+      <div class="pine" aria-hidden="true">🍍</div>
+      <h1>Querida Fabi 🍍</h1>
+      <p>
+        No me olvidé de ti y siempre te tengo en mi mente y en mi corazón. 💛<br><br>
+        No olvides que cualquier cosa cuentas conmigo. Hoy quiero agradecer a Dios por tu vida y por habernos regalado la maravillosa persona que eres. 🙏<br><br>
+        Nunca cambies, porque siempre demostraste que a pesar de todos los obstáculos y adversidades eres una mujer guerrera. 💪<br><br>
+        Por eso te admiro mucho. Pásala bien, perdón por la hora — lo programé recién 😅<br><br>
+        Te quiero mucho.<br><br>
+        <strong>Att: tu mejor amigo que nunca te olvida,</strong><br>
+        <em>Walter White (alias El Walto) 💛</em>
+      </p>
+      <div style="text-align:center;margin-top:20px;">
+        <button onclick="confettiBurst()">🌟 Haz clic para tu lluvia de piñas 🌟</button>
+      </div>
+      <footer>#PiñaPower #ElWaltoTeSaluda</footer>
+    </section>
+  </div>
+  <canvas id="confetti" style="position:fixed;inset:0;pointer-events:none;"></canvas>
+  <script>
+    const canvas=document.getElementById('confetti');const ctx=canvas.getContext('2d');let W,H,pieces=[];function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}addEventListener('resize',resize);resize();
+    function spawn(n=160){for(let i=0;i<n;i++){pieces.push({x:Math.random()*W,y:-20-Math.random()*H*0.3,r:4+Math.random()*6,a:Math.random()*Math.PI*2,v:1+Math.random()*3,s:Math.random()*0.04+0.01,hue:50+Math.random()*70});}}
+    function draw(){ctx.clearRect(0,0,W,H);for(const p of pieces){p.y+=p.v;p.x+=Math.sin(p.a)*0.8;p.a+=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=`hsl(${p.hue} 90% 60%)`;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);ctx.restore();}pieces=pieces.filter(p=>p.y<H+30);if(pieces.length)requestAnimationFrame(draw);}
+    function confettiBurst(){spawn();draw();}
+  </script>
+</body>
+</html>
